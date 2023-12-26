@@ -49,11 +49,11 @@ const PORT = process.env.PORT || 3001;
 const path = require('path');
 app.use(express.json());
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, 'build')));
 app.get('/', (req, res) => {
   res.send('Hello, welcome to Tigersheet!');
 });
-app.use(express.static(path.join(__dirname, 'build')));
+
 // app.get('/api/get-records/:sheet_id', async (req, res) => {
 //   const sheetId = req.params.sheet_id;
 //   const apiKey = 'C9B53439FA03FB946C93E9AC9963070B221EC0E3CD66399A';
