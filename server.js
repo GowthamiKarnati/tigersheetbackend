@@ -49,7 +49,7 @@ const PORT = process.env.PORT || 3001;
 const path = require('path');
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')));
+
 app.get('/', (req, res) => {
   res.send('Hello, welcome to Tigersheet!');
 });
@@ -102,9 +102,7 @@ app.get('/sendpostrequest', async (req, res) => {
   }
 });
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  });
+ 
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
