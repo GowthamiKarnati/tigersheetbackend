@@ -46,14 +46,14 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+const path = require('path');
 app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello, welcome to Tigersheet!');
 });
-
+app.use(express.static(path.join(__dirname, 'build')));
 // app.get('/api/get-records/:sheet_id', async (req, res) => {
 //   const sheetId = req.params.sheet_id;
 //   const apiKey = 'C9B53439FA03FB946C93E9AC9963070B221EC0E3CD66399A';
@@ -101,6 +101,10 @@ app.get('/sendpostrequest', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
